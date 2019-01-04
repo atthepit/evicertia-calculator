@@ -59,4 +59,61 @@ describe("Calculator Handlers", () => {
       expect(res.send).toHaveBeenCalledWith(expected);
     });
   });
+
+  describe("Substract", () => {
+    it("should fail if Minuend or Subtrahend are not passed", () => {
+      const req = {
+        body: { other: "thing" }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.subHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain("Expected number");
+    });
+
+    it("should fail if Minuend or Subtrahend is not numbers", () => {
+      let req = {
+        body: {
+          Minuend: "a",
+          Subtrahend: 1
+        }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.subHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain("Expected number");
+
+      req = {
+        body: {
+          Minuend: 1,
+          Subtrahend: "a"
+        }
+      };
+      handlers.subHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(2);
+      expect(next.mock.calls[0][0].message).toContain("Expected number");
+    });
+
+    it("should return the difference", () => {
+      const req = {
+        body: {
+          Minuend: 3,
+          Subtrahend: 1
+        }
+      };
+      const res = {
+        send: jest.fn()
+      };
+      const next = jest.fn();
+      const expected = { Difference: 2 };
+
+      handlers.subHandler(req, res, next);
+      expect(res.send).toHaveBeenCalledTimes(1);
+      expect(res.send).toHaveBeenCalledWith(expected);
+    });
+  });
 });

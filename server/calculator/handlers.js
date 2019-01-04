@@ -14,4 +14,21 @@ function addHandler(req, res, next) {
   res.send(response);
 }
 
-module.exports = { addHandler };
+function subHandler(req, res, next) {
+  const { Minuend: minuend, Subtrahend: subtrahend } = req.body;
+  let result;
+
+  try {
+    result = Calculator.substract(minuend, subtrahend);
+  } catch (error) {
+    return next(error);
+  }
+
+  const response = { Difference: result };
+  res.send(response);
+}
+
+module.exports = {
+  addHandler,
+  subHandler
+};
