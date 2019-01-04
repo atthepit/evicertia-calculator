@@ -54,3 +54,15 @@ npm run dev
 ```
 
 This will watch for any changes in the files and restart the server.
+
+## The Connectors
+
+To store the Journal a DB Connector interface has been implemented in three different ways.
+
+Currently the Journal only has a store operation that will be called when the "X-Evi-Tracking-Id" header is specify, so the connectors only implement a `save` operation.
+
+### Memory Connector
+
+The Memory Connector does NOT persist the data and only stores the Journal in an in memory store.
+
+To use it you can set `DB_CONNECTOR=memory` in the `.env` file or inline.
