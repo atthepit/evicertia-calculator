@@ -1,0 +1,11 @@
+{
+  "name": "evicertia-calculator",
+  "version": "1.0.0",
+  "description": "Evicertia Calculator Code Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Pedro Paredes <email@pparedes.com>",
+  "license": "MIT"
+}
