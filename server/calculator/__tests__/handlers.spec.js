@@ -175,4 +175,85 @@ describe("Calculator Handlers", () => {
       expect(res.send).toHaveBeenCalledWith(expected);
     });
   });
+
+  describe("Division", () => {
+    it("should fail if Dividend or Divisor are not passed", () => {
+      const req = {
+        body: { other: "thing" }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.divHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain("Expected number");
+    });
+
+    it("should fail if Dividend or Divisor is not numbers", () => {
+      let req = {
+        body: {
+          Dividend: "a",
+          Divisor: 1
+        }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.divHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain("Expected number");
+
+      req = {
+        body: {
+          Dividend: 1,
+          Divisor: "a"
+        }
+      };
+      handlers.divHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(2);
+      expect(next.mock.calls[0][0].message).toContain("Expected number");
+    });
+
+    it("should return the division", () => {
+      let req = {
+        body: {
+          Dividend: 7,
+          Divisor: 2
+        }
+      };
+      const res = {
+        send: jest.fn()
+      };
+      const next = jest.fn();
+      let expected = {
+        Quotient: 3,
+        Remainder: 1
+      };
+
+      handlers.divHandler(req, res, next);
+      expect(res.send).toHaveBeenCalledTimes(1);
+      expect(res.send).toHaveBeenCalledWith(expected);
+    });
+
+    it("should handle division by 0", () => {
+      const req = {
+        body: {
+          Dividend: 7,
+          Divisor: 0
+        }
+      };
+      const res = {
+        send: jest.fn()
+      };
+      const next = jest.fn();
+      const expected = {
+        Quotient: Infinity,
+        Remainder: NaN
+      };
+
+      handlers.divHandler(req, res, next);
+      expect(res.send).toHaveBeenCalledTimes(1);
+      expect(res.send).toHaveBeenCalledWith(expected);
+    });
+  });
 });

@@ -41,8 +41,25 @@ function multHandler(req, res, next) {
   res.send(response);
 }
 
+function divHandler(req, res, next) {
+  const { Dividend: dividend, Divisor: divisor } = req.body;
+
+  let result;
+  try {
+    result = Calculator.fullDivision(dividend, divisor);
+  } catch (error) {
+    return next(error);
+  }
+  const response = {
+    Quotient: result.quotient,
+    Remainder: result.remainder
+  };
+  res.send(response);
+}
+
 module.exports = {
   addHandler,
   subHandler,
-  multHandler
+  multHandler,
+  divHandler
 };
