@@ -32,3 +32,25 @@ npm run coverage
 ```
 
 You can visit the [Jest](https://jestjs.io/) documentation to see the more options for the test runner.
+
+## Setting the environment
+
+The project uses dotenv files to fill in the needed environment variables. Rename the `.env.example` file to `.env` and fill in the variables with the correspondig info.
+
+## The Server
+
+To launch the Calculator server you can run:
+
+```sh
+npm start
+```
+
+### Development mode
+
+You can start the Calculator server in development mode with:
+
+```sh
+npm run dev
+```
+
+This will watch for any changes in the files and restart the server.
