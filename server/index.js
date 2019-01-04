@@ -1,10 +1,8 @@
 const express = require("express");
+const calculator = require("./calculator");
 
 const app = express();
-
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
+app.use("/calculator", calculator);
 
 app.listen(process.env.CALCULATOR_PORT, () => {
   console.log(
