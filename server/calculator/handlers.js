@@ -11,7 +11,9 @@ function addHandler(req, res, next) {
   }
 
   const response = { Sum: result };
+  res.locals.result = response;
   res.send(response);
+  next();
 }
 
 function subHandler(req, res, next) {
@@ -25,7 +27,9 @@ function subHandler(req, res, next) {
   }
 
   const response = { Difference: result };
+  res.locals.result = response;
   res.send(response);
+  next();
 }
 
 function multHandler(req, res, next) {
@@ -37,8 +41,11 @@ function multHandler(req, res, next) {
   } catch (error) {
     return next(error);
   }
+
   const response = { Product: result };
+  res.locals.result = response;
   res.send(response);
+  next();
 }
 
 function divHandler(req, res, next) {
@@ -50,11 +57,14 @@ function divHandler(req, res, next) {
   } catch (error) {
     return next(error);
   }
+
   const response = {
     Quotient: result.quotient,
     Remainder: result.remainder
   };
+  res.locals.result = response;
   res.send(response);
+  next();
 }
 
 function errorHandler(err, req, res, next) {

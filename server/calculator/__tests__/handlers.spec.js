@@ -11,7 +11,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { other: "thing" }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.addHandler(req, res, next);
@@ -25,7 +25,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { Addends: "not an array" }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.addHandler(req, res, next);
@@ -39,7 +39,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { Addends: [1, "a"] }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.addHandler(req, res, next);
@@ -54,7 +54,8 @@ describe("Calculator Handlers", () => {
         body: { Addends: [1, 2, 3] }
       };
       const res = {
-        send: jest.fn()
+        send: jest.fn(),
+        locals: {}
       };
       const next = jest.fn();
       const expected = { Sum: 6 };
@@ -70,7 +71,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { other: "thing" }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.subHandler(req, res, next);
@@ -85,7 +86,7 @@ describe("Calculator Handlers", () => {
           Subtrahend: 1
         }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.subHandler(req, res, next);
@@ -111,7 +112,8 @@ describe("Calculator Handlers", () => {
         }
       };
       const res = {
-        send: jest.fn()
+        send: jest.fn(),
+        locals: {}
       };
       const next = jest.fn();
       const expected = { Difference: 2 };
@@ -127,7 +129,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { other: "thing" }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.multHandler(req, res, next);
@@ -141,7 +143,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { Factors: "not an array" }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.multHandler(req, res, next);
@@ -155,7 +157,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { Factors: [1, "a"] }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.multHandler(req, res, next);
@@ -170,7 +172,8 @@ describe("Calculator Handlers", () => {
         body: { Factors: [1, 2, 3] }
       };
       const res = {
-        send: jest.fn()
+        send: jest.fn(),
+        locals: {}
       };
       const next = jest.fn();
       const expected = { Product: 6 };
@@ -186,7 +189,7 @@ describe("Calculator Handlers", () => {
       const req = {
         body: { other: "thing" }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.divHandler(req, res, next);
@@ -201,7 +204,7 @@ describe("Calculator Handlers", () => {
           Divisor: 1
         }
       };
-      const res = {};
+      const res = { locals: {} };
       const next = jest.fn();
 
       handlers.divHandler(req, res, next);
@@ -227,7 +230,8 @@ describe("Calculator Handlers", () => {
         }
       };
       const res = {
-        send: jest.fn()
+        send: jest.fn(),
+        locals: {}
       };
       const next = jest.fn();
       let expected = {
@@ -248,7 +252,8 @@ describe("Calculator Handlers", () => {
         }
       };
       const res = {
-        send: jest.fn()
+        send: jest.fn(),
+        locals: {}
       };
       const next = jest.fn();
       const expected = {
