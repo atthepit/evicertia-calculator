@@ -28,7 +28,21 @@ function subHandler(req, res, next) {
   res.send(response);
 }
 
+function multHandler(req, res, next) {
+  const { Factors: factors } = req.body;
+
+  let result;
+  try {
+    result = Calculator.multiplyAll(factors);
+  } catch (error) {
+    return next(error);
+  }
+  const response = { Product: result };
+  res.send(response);
+}
+
 module.exports = {
   addHandler,
-  subHandler
+  subHandler,
+  multHandler
 };

@@ -116,4 +116,63 @@ describe("Calculator Handlers", () => {
       expect(res.send).toHaveBeenCalledWith(expected);
     });
   });
+
+  describe("Multiply", () => {
+    it("should fail if Factors is not passed", () => {
+      const req = {
+        body: { other: "thing" }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.multHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain(
+        "Exptected array of numbers"
+      );
+    });
+
+    it("should fail if Factors is not an array", () => {
+      const req = {
+        body: { Factors: "not an array" }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.multHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain(
+        "Exptected array of numbers"
+      );
+    });
+
+    it("should fail if Factors is not a numeric array", () => {
+      const req = {
+        body: { Factors: [1, "a"] }
+      };
+      const res = {};
+      const next = jest.fn();
+
+      handlers.multHandler(req, res, next);
+      expect(next).toHaveBeenCalledTimes(1);
+      expect(next.mock.calls[0][0].message).toContain(
+        "Exptected array of numbers"
+      );
+    });
+
+    it("should return the product of the Factors", () => {
+      const req = {
+        body: { Factors: [1, 2, 3] }
+      };
+      const res = {
+        send: jest.fn()
+      };
+      const next = jest.fn();
+      const expected = { Product: 6 };
+
+      handlers.multHandler(req, res, next);
+      expect(res.send).toHaveBeenCalledTimes(1);
+      expect(res.send).toHaveBeenCalledWith(expected);
+    });
+  });
 });
