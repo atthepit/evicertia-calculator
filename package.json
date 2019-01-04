@@ -4,6 +4,7 @@
   "description": "Evicertia Calculator Code Challenge",
   "main": "index.js",
   "scripts": {
+    "coverage": "jest --coverage",
     "test": "jest",
     "test:watch": "jest --watch"
   },
