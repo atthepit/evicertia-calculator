@@ -4,7 +4,8 @@ const {
   addHandler,
   subHandler,
   multHandler,
-  divHandler
+  divHandler,
+  errorHandler
 } = require("./handlers");
 
 const calculator = express.Router();
@@ -13,5 +14,6 @@ calculator.post("/add", addHandler);
 calculator.post("/sub", subHandler);
 calculator.post("/mult", multHandler);
 calculator.post("/div", divHandler);
+calculator.use(errorHandler);
 
 module.exports = calculator;

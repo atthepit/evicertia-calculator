@@ -57,9 +57,21 @@ function divHandler(req, res, next) {
   res.send(response);
 }
 
+function errorHandler(err, req, res, next) {
+  switch (err.name) {
+    case TypeError.prototype.name:
+      res.status(400).send(err.message);
+      break;
+    default:
+      next(err);
+      break;
+  }
+}
+
 module.exports = {
   addHandler,
   subHandler,
   multHandler,
-  divHandler
+  divHandler,
+  errorHandler
 };

@@ -1,4 +1,9 @@
 const handlers = require("../handlers");
+const {
+  NotArrayError,
+  NotNumericArrayError,
+  NotNumericParamsError
+} = require("../../../lib/calculator/errors");
 
 describe("Calculator Handlers", () => {
   describe("Add", () => {
@@ -254,6 +259,51 @@ describe("Calculator Handlers", () => {
       handlers.divHandler(req, res, next);
       expect(res.send).toHaveBeenCalledTimes(1);
       expect(res.send).toHaveBeenCalledWith(expected);
+    });
+  });
+
+  describe("Error Handler", () => {
+    it("should handle Calculator errors", () => {
+      const req = {};
+      const send = jest.fn();
+      const res = { status: jest.fn(() => ({ send })) };
+      const next = jest.fn();
+
+      let message = "NotArrayError message";
+      let err = new NotArrayError(message);
+      handlers.errorHandler(err, req, res, next);
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(send).toHaveBeenCalledWith(message);
+
+      message = "NotNumericArrayError message";
+      err = new NotNumericArrayError(message);
+      res.status.mockClear();
+      send.mockClear();
+      handlers.errorHandler(err, req, res, next);
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(send).toHaveBeenCalledWith(message);
+
+      message = "NotNumericParamsError message";
+      err = new NotNumericParamsError(message);
+      res.status.mockClear();
+      send.mockClear();
+      handlers.errorHandler(err, req, res, next);
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(send).toHaveBeenCalledWith(message);
+    });
+
+    it("should call next if the error is unexpected", () => {
+      const req = {};
+      const send = jest.fn();
+      const res = { status: jest.fn(() => ({ send })) };
+      const next = jest.fn();
+
+      let message = "ReferenceError message";
+      let err = new ReferenceError(message);
+      handlers.errorHandler(err, req, res, next);
+      expect(res.status).not.toHaveBeenCalled();
+      expect(send).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalledWith(err);
     });
   });
 });
