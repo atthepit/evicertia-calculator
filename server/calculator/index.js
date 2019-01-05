@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const JournalMiddleware = require("./journal");
 const Journal = require("../../lib/journal");
-const dbConnector = process.env.DB_CONNECTOR || "memory";
+const dbConnector = process.env.DB_CONNECTOR || "file";
 const DBConnector = require(`../../lib/db-connector/${dbConnector}-connector`);
 const {
   addHandler,

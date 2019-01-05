@@ -66,3 +66,10 @@ Currently the Journal only has a store operation that will be called when the "X
 The Memory Connector does NOT persist the data and only stores the Journal in an in memory store.
 
 To use it you can set `DB_CONNECTOR=memory` in the `.env` file or inline.
+
+### The File Connector
+
+The File Connector is a subclass of the Memory Connector. It uses an in memory store but persists the operations to a local file.
+The file path can be configuring by setting the `FILE_CONNECTOR_PATH` variable in the `.env` file or inline.
+
+To use it you can set `DB_CONNECTOR=file` in the `.env` file or inline.
