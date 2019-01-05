@@ -1,7 +1,9 @@
 const express = require("express");
+const logger = require("./logger");
 const calculator = require("./calculator");
 
 const app = express();
+app.use(logger());
 app.use("/calculator", calculator);
 
 app.listen(process.env.CALCULATOR_PORT, () => {
