@@ -4,6 +4,7 @@
   "description": "Evicertia Calculator Code Challenge",
   "main": "index.js",
   "scripts": {
+    "client": "node -r dotenv/config ./client/index",
     "coverage": "jest --coverage",
     "dev": "nodemon -r dotenv/config ./server/index.js",
     "server": "node -r dotenv/config ./server/index",
