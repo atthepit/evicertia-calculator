@@ -55,6 +55,18 @@ npm run dev
 
 This will watch for any changes in the files and restart the server.
 
+## The Client
+
+To launch the console client you need to run:
+
+```sh
+npm run client
+```
+
+A text menu will appear next and you'll have to select an option. Then, depending on the operation, you'll be expected to input a list of numbers separated by spaces.
+
+To store the operations in the Journal you'll have to enter a Tracking ID.
+
 ## The Connectors
 
 To store the Journal a DB Connector interface has been implemented in three different ways.
