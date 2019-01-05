@@ -14,28 +14,17 @@ Once installed, you have to install the project dependencies with:
 npm install
 ```
 
-## Running tests
+### PostgreSQL (optional)
 
-Make sure you have filled in the environment variables in the `.env.test` file. Since it doesn't call the real API you can fill in the values that you want.
+If you want to use the PostgreSQL Database Connector you'll need to have PostgreSQL installed. You can read instructions on how to install PostgreSQL [in this guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04).
 
-You can run all tests with the following commands:
-
-```sh
-# Run tests once
-npm test
-
-# Run in watch mode
-npm run test:watch
-
-# Get coverage report
-npm run coverage
-```
-
-You can visit the [Jest](https://jestjs.io/) documentation to see the more options for the test runner.
+Once installed you'll have to create a new DB for the project and a table called `TrackRecord`.
 
 ## Setting the environment
 
 The project uses dotenv files to fill in the needed environment variables. Rename the `.env.example` file to `.env` and fill in the variables with the correspondig info.
+
+If you are not using the PostgreSQL Database Connector you don't need to fill in the variables related to PostgreSQL.
 
 ## The Server
 
@@ -44,6 +33,15 @@ To launch the Calculator server you can run:
 ```sh
 npm start
 ```
+
+You can change the Database Connector used for the Journal to one of `memory`, `file` or `postgresql`.
+To change it you can set the `DB_CONNECTOR` variable in the `.env` file, or set it as an inline option:
+
+```sh
+DB_CONNECTOR=postgresql npm start
+```
+
+By default, the File Connector is used.
 
 ### Development mode
 
@@ -85,3 +83,19 @@ The File Connector is a subclass of the Memory Connector. It uses an in memory s
 The file path can be configuring by setting the `FILE_CONNECTOR_PATH` variable in the `.env` file or inline.
 
 To use it you can set `DB_CONNECTOR=file` in the `.env` file or inline.
+
+### The PostgreSQL Connector
+
+The PostgreSQL connector makes a connection to a PostgreSQL database to persist every operation from the Journal.
+
+To configure the connector you must specify this properties:
+
+```sh
+POSTGRESQL_HOST=
+POSTGRESQL_PORT=
+POSTGRESQL_DATABASE=
+POSTGRESQL_USER=
+POSTGRESQL_PASSWORD=
+```
+
+To use it you can set `DB_CONNECTOR=postgresql` in the `.env` file or inline.
