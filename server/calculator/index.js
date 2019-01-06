@@ -2,8 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const JournalMiddleware = require("./journal");
 const Journal = require("../../lib/journal");
-const dbConnector = process.env.DB_CONNECTOR || "file";
-const DBConnector = require(`../../lib/db-connector/${dbConnector}-connector`);
 const {
   addHandler,
   subHandler,
@@ -11,6 +9,12 @@ const {
   divHandler,
   errorHandler
 } = require("./handlers");
+
+if (process.env.DB_CONNECTOR == null) {
+  throw new Error("You must set the DB_CONNECTOR variable in the .env file");
+}
+const dbConnector = process.env.DB_CONNECTOR;
+const DBConnector = require(`../../lib/db-connector/${dbConnector}-connector`);
 
 const db = new DBConnector();
 const journal = new Journal(db);

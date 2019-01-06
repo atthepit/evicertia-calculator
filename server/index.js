@@ -6,10 +6,8 @@ const app = express();
 app.use(logger());
 app.use("/calculator", calculator);
 
-app.listen(process.env.CALCULATOR_PORT, () => {
-  console.log(
-    `\nServer running on ${process.env.CALCULATOR_BASE_URL}:${
-      process.env.CALCULATOR_PORT
-    }\n`
-  );
+const { CALCULATOR_PROTOCOL, CALCULATOR_HOST, CALCULATOR_PORT } = process.env;
+app.listen(CALCULATOR_PORT, () => {
+  const BASE_URL = `${CALCULATOR_PROTOCOL}://${CALCULATOR_HOST}:${CALCULATOR_PORT}`;
+  console.log(`\nServer running on ${BASE_URL}\n`);
 });

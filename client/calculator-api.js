@@ -1,8 +1,7 @@
 const axios = require("axios");
 
-const BASE_URL = `${process.env.CALCULATOR_BASE_URL}:${
-  process.env.CALCULATOR_PORT
-}`;
+const { CALCULATOR_PROTOCOL, CALCULATOR_HOST, CALCULATOR_PORT } = process.env;
+const BASE_URL = `${CALCULATOR_PROTOCOL}://${CALCULATOR_HOST}:${CALCULATOR_PORT}`;
 
 class CalculatorAPI {
   setTrackId(trackId) {
