@@ -26,6 +26,34 @@ The project uses dotenv files to fill in the needed environment variables. Renam
 
 If you are not using the PostgreSQL Database Connector you don't need to fill in the variables related to PostgreSQL.
 
+## Getting started
+
+To run the full aplication you'll need to execute both the client and server app.
+
+To run the server you'll have to make sure that the `CALCULATOR_HOST` and `CALCULATOR_PORT` variables in the `.env` file are set. For example:
+
+```sh
+CALCULATOR_PROTOCOL=http
+CALCULATOR_HOST=localhost
+CALCULATOR_PORT=3000
+```
+
+Once configured you can execute the following command:
+
+```sh
+npm start
+```
+
+Then to execute the client, open a new terminal and execute:
+
+```sh
+npm run client
+```
+
+The application menu will appear and you'll have to input the number that corresponds to the action you want to execute. Once you've done this, you'll have to input the numbers to perform the operation sepparated by an empty space.
+
+For example, to add a list of numbers you'll select option number `1` and then input the list `1 125 -43 8` and hit enter. The client will then contact the server and show the output of the operation, `91` in this case.
+
 ## The Server
 
 To launch the Calculator server you can run:
@@ -34,8 +62,9 @@ To launch the Calculator server you can run:
 npm start
 ```
 
-You can change the Database Connector used for the Journal to one of `memory`, `file` or `postgresql`.
-To change it you can set the `DB_CONNECTOR` variable in the `.env` file, or set it as an inline option:
+You can change the server protocol, host and port in the `.env` file with the `CALCULATOR_PROTOCOL`, `CALCULATOR_HOST`, and `CALCULATOR_PORT` variables. By default, the complete URL is `http://localhost:3000`.
+
+You can also change the Database Connector used for the Journal to one of `memory`, `file` or `postgresql`. To change it you can set the `DB_CONNECTOR` variable in the `.env` file, or set it as an inline option:
 
 ```sh
 DB_CONNECTOR=postgresql npm start
