@@ -128,3 +128,23 @@ POSTGRESQL_PASSWORD=
 ```
 
 To use it you can set `DB_CONNECTOR=postgresql` in the `.env` file or inline.
+
+## Tooling
+
+### Express
+
+Express is basically the defacto solution when creating a server with Node Js. It's really simple to start a project, organize code for each sub-route, and the middleware aproach mades it really easy to add common functionality like the Journal.
+
+### Jest
+
+Jest is hands down the best test framework for JavaScript. Although it shines better with React, testing with Jest is very fast, watch mode makes TDD very efficient and the coverage reports are completly free.
+
+### Prettier
+
+Prettier is another amazing tool. It allows you to never think of formatting code again, ever. It an amazing productivity tool.
+
+### Dotenv
+
+Dotenv allows to set environment variables for your project with `.env` files. You just need to specify each variable in a new line and you're set.
+
+It also allows to use different files for each `NODE_ENV` by specifying `.env.${NODE_ENV}` in the file name.
